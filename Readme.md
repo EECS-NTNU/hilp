@@ -1,14 +1,14 @@
 # HILP: Accounting for Workload-Level Parallelism in System-on-Chip Design Space Exploration
 
 HILP is an early-stage design space exploration tool for modeling the performance of heterogeneous SoCs while fully accounting for the limits of Workload-Level Parallelism. For more details, please see the full paper.
-
->@inproceedings{hilp,
+```
+@inproceedings{hilp,
   title        = {HILP: Accounting for Workload-Level Parallelism in System-on-Chip Design Space Exploration},
   booktitle    = {Proceedings of the International Symposium on High Performance Computer Architecture (HPCA)},
   author       = {Rogers, Joseph and Eeckhout, Lieven and Jahre, Magnus},
   year         = {2025}
   }
-
+```
 #### Repository Contents
 This repository provides the full HILP Minzinc model, as well as the profiled performance data and scripts needed to generate inputs and run the model. To guide users through this process, we provide three example experiments demonstrating each of these steps.
 
@@ -42,7 +42,8 @@ The "explore_socs.sh" script uses the export DZN files, along with the Minizinc 
 ". What then follows is a full print detailing the specifics of how the workload was successfully scheduled on the SoC. Note: HILP variables names and solver prints are done using typical JSSP terminology. Please note as well that Minizinc uses 1, not 0 indexing.
 
 Typical output snippit.
->Start Workload Schedule
+```
+Start Workload Schedule
 job,task,machine,start_time,duration,bandwidth,power
 1,1,1,1,2,1,8
 1,2,2,3,1,70,22
@@ -76,12 +77,13 @@ job,task,machine,start_time,duration,bandwidth,power
 10,3,1,24,1,205,9
 End Workload Schedule
 Makespan: 25
-
+```
 Each sequence of numbers in the above output snippit represents how each workload phase (task), for each application (job), was executed on each SoC component (machine). For example, the first line "1,1,1,1,2,1,8" says that phase 1 of application 1 executed on SoC component 1. It started at time 1, ran for 2 time steps, used 1GB/s of memory bandwidth, and 8 Watts of power. The full makespan of the schedule "25" is printed at the bottom after the end of the phase schedule.
 
 Between prints of newly found solutions, the solver will occasionally print out status updates when it tightens the optimality bounds.
->%% #Bound  14.41s best:25    next:[18,24]    reduced_costs
-
+```
+%% #Bound  14.41s best:25    next:[18,24]    reduced_costs
+```
 The above print means that the best found solution still only has a makespan of 25, and that only the gap between 18 to 24 remains unexplored. These numbers can also be used to calculate the current optimality gap e.g., 18/24 = 0.75.
 
 As explained in the paper, it can happen that solving fully to optimalities of 1.0 can extreme amounts of compute, without yielding any useful design insights. We therefore advise to use a timer when invoking the solver, e.g., `timeout 4h` to gather initial results, and then analyze whether or not it makes sense to continue.
