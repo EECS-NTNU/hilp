@@ -86,6 +86,7 @@ The above print means that the best found solution still only has a makespan of 
 
 As explained in the paper, it can happen that solving fully to optimalities of 1.0 can extreme amounts of compute, without yielding any useful design insights. We therefore advise to use a timer when invoking the solver, e.g., `timeout 4h` to gather initial results, and then analyze whether or not it makes sense to continue.
 
+For examples 2 and 3, follow the same steps as shown for example 1.
 
 ### Example 2: Bandwidth Limiting a GPU (CPUs and GPU SoC).
 This example shows how to sweep the memory bandwidth constraint and view its effects on a SoC comprising both CPUs and GPUs. We reccommend using a system with 32GB of RAM to run this example. Expect execution to a 0.9 optimality gap to take several hours.
