@@ -1,2 +1,2 @@
 *.dzn
-./experiments/*.csv
+./experiments/**/*.csv
